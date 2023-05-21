@@ -1,0 +1,58 @@
+{% extends 'auth/baselogin.html' %}
+{% load static %}
+{% block login %}Login{% endblock %}
+
+
+{% block logincontent %}
+<div class="container">
+    <div class="form-box">
+        <h1 id="title">Sign In</h1>
+        <form action="." method="POST" id="form">
+            {% csrf_token %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="input-group">
+                        <p class="error">There was an error logging in. Please try again.</p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <div class="input-group">
+                <input type="text" name="username" id="username" class="input-field" placeholder="Username" required>
+                <br>
+                <span id="username-error" class="error"></span>
+            </div>
+            <div class="input-group">
+                <input type="password" name="password" id="password" class="input-field" placeholder="Password" required>
+                <br>
+                <span id="password-error" class="error"></span>
+            </div>
+            <div class="input-group">
+                <input type="submit" value="Sign In" class="btn">
+            </div>
+            <div class="input-group">
+                <a href="{% url 'register' %}" class="link">Don't have an account? <span>Sign Up</span></a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // when the username field is incorrect after submitting the form, highlight the field
+    var username = document.getElementById("username");
+    var password = document.getElementById("password");
+
+    if(username.value == "" || username.value == null){
+        document.getElementById("username-error").innerHTML = "Please enter a username";
+        username.focus();
+        return false;
+    }
+
+    if(password.value == "" || password.value == null){
+        document.getElementById("password-error").innerHTML = "Please enter a password";
+        password.focus();
+        return false;
+    }
+
+</script>
+
+{% endblock %}

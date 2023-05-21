@@ -1,0 +1,126 @@
+{% extends 'base_template/base.html' %}
+{% load static %}
+{% block title %}Profile{% endblock %}
+<link rel="stylesheet" href="{% static '/css/profile.css' %}">
+{% block content %}
+<style>
+    .orders-list{
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+    .orders-list ul{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .orders-list ul li{
+        padding: 5px;
+    }
+    .orders-list ul li:nth-child(odd){
+        background: #eee;
+    }
+</style>
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <form action="{% url 'user-profile-edit-image' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                    <img class="rounded-circle mt-5" name="profile_pic_" width="150px" src="{{user.profile.profile_pic.url}}">  
+                    <span class="font-weight-bold">{{user.username}}</span>
+                    <span class="text-black-50">{{user.email}}</span>
+                    <span> </span>
+                </div>
+                <div class="col-md-12">
+                    <input type="file" class="form-control" name="profile_pic_">
+                    <button class="btn btn-primary profile-button" type="submit">Save Profile Picture</button>
+                </div>
+            </form>
+            
+        </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Profile Settings</h4>
+                </div>
+                <form action="{% url 'update-profile-info' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <label class="labels">First Name</label>
+                            <input type="text" class="form-control" name="first_name" placeholder="First name" value="{{user.first_name}}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="labels">Last Name</label>
+                            <input type="text" class="form-control" name="last_name" value="{{user.last_name}}" placeholder="Last name">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <label class="labels">Mobile Number</label>
+                            <input type="text" class="form-control" placeholder="enter phone number" value="{{user.profile.phone}}" name="phone">
+                        </div>
+                        <div class="col-md-12">
+                            <label class="labels">Email</label>
+                            <input type="text" class="form-control" placeholder="enter email" value="{{user.profile.email}}" name="email">
+                        </div>
+                        <div class="col-md-12">
+                            <label class="labels">City</label>
+                            <input type="text" class="form-control" name="city" placeholder="enter city here" value="{{user.profile.city}}">
+                        </div>
+                        <div class="col-md-12">
+                            <label class="labels">Zipcode</label>
+                            <input type="text" class="form-control" name="zipcode" placeholder="enter zipcode here" value="{{user.profile.zipcode}}">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label class="labels">Country</label>
+                            <input type="text" class="form-control" name="country" placeholder="country" value="{{user.profile.country}}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="labels">State/Region</label>
+                            <input type="text" class="form-control" value="{{user.profile.state}}" name="state" placeholder="state">
+                        </div>
+                    </div>
+                    <div class="mt-5 text-center">
+                        <button class="btn btn-primary profile-button" type="submit">Save Profile</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {% comment %} We will add user history of the website here {% endcomment %}
+        <div class="col-md-4">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between text-center">
+                    <span><strong>Purchased History.</strong></span>
+                </div><br>
+                <!--Card of orders-->
+                {% if orders %}
+                    {% for order in orders %}
+                        <div class="orders-list">
+                            <ul>
+                                {% comment %} <li>Order ID: <strong>{{order.order_id}}</strong></li> {% endcomment %}
+                                <li>Product Name: <strong>{{order.product.product_name|truncatechars:50}}</strong></li>
+                                {% comment %} <li>Product Category: <strong>{{order.product.product_cat}}</strong></li> {% endcomment %}
+                                <li>Order Date: <strong>{{order.ordered_date}}</strong></li>
+                                <li>Order Status: <strong>{{order.status}}</strong></li>
+                                <li>Payment Method: <strong>{{order.payment}}</strong></li>
+                            </ul>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+  
+        {% comment %} <div class="col-md-4">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center experience"><span>Edit Experience</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Experience</span></div><br>
+                <div class="col-md-12"><label class="labels">Experience in Designing</label><input type="text" class="form-control" placeholder="experience" value=""></div> <br>
+                <div class="col-md-12"><label class="labels">Additional Details</label><input type="text" class="form-control" placeholder="additional details" value=""></div>
+            </div>
+        </div> {% endcomment %}
+    </div>
+</div>
+{% endblock %}

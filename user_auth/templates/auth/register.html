@@ -1,0 +1,42 @@
+{% extends 'auth/baselogin.html' %}
+{% load static %}
+{% block login %}Register{% endblock %}
+
+
+{% block logincontent %}
+<div class="container">
+    <div class="form-boxx">
+        <h1>Register</h1>
+        <form action="" method="POST" id="form">
+            {% csrf_token %}
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="input-group">
+                        <p class="error">There was an error regsitering you in. Please try again.</p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <div class="input-group">
+                <input type="text" name="username" placeholder="Username" class="input-field" required>
+            </div>
+            <div class="input-group">
+                <input type="email" name="email" placeholder="Email" class="input-field" required>
+            </div>
+            <div class="input-group">
+                <input type="password" name="password" placeholder="Password" class="input-field" required>
+            </div>
+            <div class="input-group">
+                <input type="password" name="confirm_password" placeholder="Confirm Password" class="input-field" required>
+            </div>
+            <div class="input-group">
+                <input type="submit" value="Register" class="btn">
+            </div>
+        </form>
+        <div class="input-group">
+            <a href="{% url 'login' %}" class="link">Already have an account? Login</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+    

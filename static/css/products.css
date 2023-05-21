@@ -1,0 +1,56 @@
+body {
+    background: #eee
+}
+.products{
+    margin-top: 130px;
+    margin-bottom: 30px;
+    background-color: #ed8e00;
+    padding: 50px 0px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #000000;
+
+}
+.products h1{
+    text-align: center;
+    font-size: 40px;
+    font-weight: 600;
+    margin-bottom: 50px;
+    color: #fff;
+}
+.ratings i {
+    font-size: 16px;
+    color: red
+}
+
+.strike-text {
+    color: red;
+    text-decoration: line-through
+}
+
+.product-image {
+    width: 100%
+}
+
+.dot {
+    height: 7px;
+    width: 7px;
+    margin-left: 6px;
+    margin-right: 6px;
+    margin-top: 3px;
+    background-color: blue;
+    border-radius: 50%;
+    display: inline-block
+}
+
+.spec-1 {
+    color: #938787;
+    font-size: 15px
+}
+
+h5 {
+    font-weight: 400
+}
+
+.para {
+    font-size: 16px
+}

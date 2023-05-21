@@ -1,0 +1,62 @@
+.row {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.men {
+    margin: auto;
+    width: 80%;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.men h1 {
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.men-col {
+    flex-basis: 32%;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.men img {
+    width: 350px;
+    height: 400px;
+}
+
+.layer {
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 800ms ease;
+}
+
+.layer:hover {
+    background: rgba(250, 92, 0, 0.767);
+}
+
+.layer h3 {
+    width: 100%;
+    font-weight: 500;
+    color: #fff;
+    font-size: 26px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    opacity: 0;
+    transition: all 800ms ease;
+}
+
+.layer:hover h3 {
+    bottom: 49%;
+    opacity: 1;
+}

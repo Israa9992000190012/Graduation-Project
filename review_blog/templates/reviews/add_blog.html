@@ -1,0 +1,64 @@
+{% extends 'base_template/base.html' %}
+{% load static %}
+{% block title %}Add Blog{% endblock %}
+
+{% block content %}
+<style>
+    .add{
+        width: 50%;
+        margin: 150px 300px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #ccc;
+    }
+    .add h2{
+        text-align: center;
+        color: #f33c3c;
+    }
+    form#add-blog {
+        width: 50%;
+        margin: 0 auto;
+    }
+    form#add-blog input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    form#add-blog input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f33c3c;
+    }
+    form#add-blog textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    form#add-blog input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+</style>
+
+<div class="add">  
+    <h2>Add your Blog</h2>
+    <form method="POST" enctype="multipart/form-data" action="" id="add-blog">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Add Blog">
+    </form>
+</div>
+{% endblock %}
+

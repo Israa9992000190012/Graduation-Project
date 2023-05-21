@@ -1,0 +1,306 @@
+{% extends 'base_template/base.html' %}
+{% load static %}
+{% block title %}Blog-Details{% endblock %}
+
+{% block content %}
+<style>
+    .body{
+        width: 100%;
+        height: 100%;
+        background-color: #f5f5f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        margin-top: 20px;
+    }
+    .d-1{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .d-1 img{
+        width: 50%;
+        height: 50%;
+        border-radius: 10px;
+    }
+    .d-2{
+        width: 50%;
+        height: 50%;
+        margin-left: 20px;
+    }
+    .d-2 h2{
+        font-size: 30px;
+        font-weight: 600;
+        color: #000;
+    }
+    .d-2 p{
+        font-size: 20px;
+        font-weight: 400;
+        color: #000;
+        margin-top: 20px;
+    }
+    .d-3{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+    }
+    .d-4{
+        width: 50%;
+        height: 50%;
+    }
+    .d-4 p{
+        font-size: 20px;
+        font-weight: 400;
+        color: #000;
+        margin-left: 20px;
+        padding: 10px;
+        border-radius: 10px;
+        background-color: #f5f5f5;
+        font-weight: 800;
+    }
+    .d-5{
+        width: 50%;
+        height: 50%;
+    }
+    .d-5 p{
+        font-size: 20px;
+        font-weight: 400;
+        color: #000;
+        margin-left: 20px;
+        padding: 10px;
+        border-radius: 10px;
+        background-color: #f5f5f5;
+        font-weight: 400;
+    }
+    .comments{
+        width: 100%;
+        height: 100%;
+        background-color: #f5f5f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        margin-top: 20px;
+    }
+    .comments p{
+        font-size: 20px;
+        font-weight: 400;
+        color: #000;
+        margin-left: 20px;
+        padding: 10px;
+        border-radius: 10px;
+        background-color: #f5f5f5;
+        font-weight: 400;
+    }
+    .comments-title{
+        font-size: 30px;
+        font-weight: 600;
+        color: #000;
+        margin-bottom: 20px;
+    }
+    .comments-list{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .comment{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    .comment-body{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #fff;
+    }
+    .comment-meta{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    .comment-author{
+        width: 50%;
+        height: 50%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .comment-author img{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+    .comment-author .fn{
+        font-size: 20px;
+        font-weight: 600;
+        color: #000;
+    }
+    .comment-author .says{
+        font-size: 20px;
+        font-weight: 400;
+        color: #000;
+        margin-left: 10px;
+    }
+    .comment-metadata{
+        width: 50%;
+        height: 50%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    .comment-metadata a{
+        text-decoration: none;
+    }
+    .comment-metadata p{
+        font-size: 20px;
+        font-weight: 400;
+        color: #000;
+        margin-left: 10px;
+    }
+    .comment-content{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .comment-content p{
+        font-size: 20px;
+        font-weight: 400;
+        color: #000;
+    }
+    .comment-box{
+        width: 50%;
+        height: 100%;
+        padding: 10px;
+        border-radius: 10px;
+        background-color: #fff;
+        margin-top: 20px;
+        margin-left: 25%;
+
+    }
+    .comment-box h2{
+        font-size: 30px;
+        font-weight: 600;
+        color: #000;
+        margin-bottom: 20px;
+    }
+    #comment-form{
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        border-radius: 10px;
+        
+    }
+    #comment-form input{
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid #f5f5f5;
+        font-size: 20px;
+        font-weight: 400;
+        color: #000;
+    }
+    #comment-form button{
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid #f5f5f5;
+        font-size: 20px;
+        font-weight: 400;
+        color: #000;
+        background-color: #f5f5f5;
+        margin-top: 20px;
+    }
+
+
+</style>
+<h1 class="heading">Blog <span>  Details</span></h1>
+<div class="body">
+    <div class="d-1">
+        <img src="{{blog.blog_image.url}}" alt="blog-1">
+        <div class="d-2">
+            <h2>{{blog.title}}</h2>
+            <p>{{blog.content}}</p>
+            <div class="d-3">
+                <div class="d-4">
+                    <p>{{blog.author}}</p>
+                </div>
+                <div class="d-5">
+                    <p>{{blog.created_at|date:"d-m-Y"}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Comments -->
+<div class="comments">
+    <h2 class="comments-title">Comments</h2>
+    {% if blog.comments.count == 0 %}
+        <p>No comments yet</p>
+    {% else %}
+        <ul class="comments-list">
+            {% for comment in blog.comments.all %}
+                <li class="comment">
+                    <div class="comment-body">
+                        <div class="comment-meta">
+                            <div class="comment-author vcard">
+                                <img src="{{comment.user.profile.profile_pic.url}}" alt="profile">
+                                <b class="fn">@ {{comment.user}}</b>
+                            </div>
+                            <div class="comment-metadata">
+                                <a href="#">
+                                    <time>{{comment.created_at}}</time>
+                                </a>
+                            </div>
+                        </div>
+                        <p>{{comment.comment}}</p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    
+</div>
+{% if request.user.is_authenticated %}
+    <div class="comment-box">
+        <form id="comment-form" action="{% url 'add-comment-on-blog' blog.id %}" method="POST">
+        {% csrf_token %}
+            <input type="text" name="comment" placeholder="Comment..." required>
+            <button type="submit">Comment</button>
+        </form>
+    </div>
+{% endif %}
+
+<!-- End Comments -->
+
+
+
+{% endblock %}

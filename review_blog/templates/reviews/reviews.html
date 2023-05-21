@@ -1,0 +1,112 @@
+{% extends 'base_template/base.html' %}
+{% load static %}
+{% block title %}Reviews{% endblock %}
+
+{% block content %}    <!-- review -->
+<style>
+    .main-section{
+        width: 100%;
+        height: 100%;
+        background-color: #f5f5f5;
+        padding: 10px;
+    }
+    .main-section h1{
+        font-size: 30px;
+        font-weight: 600;
+        color: #000;
+        margin-bottom: 20px;
+    }
+    .main-section span{
+        color: #f00;
+    }
+    .head-image{
+        width: 100%;
+        height: 300px;
+        margin-bottom: 20px;
+        border-radius: 20px;
+        overflow: hidden;
+        padding: 5px;
+    }
+    .head-image img{
+        width: 50%;
+        height: 100%;
+        object-fit: cover;
+        justify-content: center;
+        margin-left: 25%;
+    }
+    hr{
+        border: 1px solid #000;
+        
+    }
+    .user-image{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 10px;
+    }
+    .user-image img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .user-name{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    #center{
+        text-align: center;
+        font-size: 20px;
+        font-weight: 600;
+        color: #000;
+        margin-top: 20px;
+    }
+
+</style>
+
+<div class="main-section">
+    <hr>
+    <h1 class="text-center" style="margin-top: 15px; padding: 10px"><span>{{ product.product_name }}</span> Reviews</h1>
+    <hr>
+    <!--Image for product-->
+    {% if product.product_image %}
+        <div class="head-image">
+            <img src="{{product.product_image.url}}" alt="image-product">
+        </div>
+    {% else %}
+        <div class="head-image">
+            <img src="{% static 'images/no_image.png' %}" alt="image-product">
+        </div>
+    {% endif %}
+</div>
+
+
+
+
+{% if reviews %}
+    {% for review in reviews %}
+        <section class="review">
+            <div class="review-box-container">
+            <div class="review-box">
+                <div class="box-top">
+                    <div class="profile">
+                        <div class="user-name">
+                            <strong>{{review.name}}</strong>
+                            <span>{{review.created_at}}</span>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="clinet-comment">
+                    <p style="font-size: 15px;">{{review.review}}</p>
+                </div>
+            </div>
+        </section>
+    {% endfor %}
+{% else %}
+    <p id="center">No reviews yet for <span style="color: red;">{{ product.product_name }}</span></p>
+{% endif %}
+<hr>
+<button class="btn btn-primary" style="margin-left: 45%; margin-bottom: 20px;"><a href="{% url 'product-details' product.id %}" style="color: #fff;">Back</a></button>
+{% endblock %}

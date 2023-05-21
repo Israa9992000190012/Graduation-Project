@@ -1,0 +1,136 @@
+{% extends 'base_template/base.html' %}
+{% load static %}
+{% block title %}Cart{% endblock %}
+
+{% block content %}
+
+    <style> 
+        table{
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td{
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th{
+            text-align: left;
+        }
+        td.text-right{
+            text-align: right;
+        }
+        h3{
+            text-align: center;
+            font-size: 20px;
+            font-weight: 500;
+        }
+    </style>
+    <!-- shopping cart -->
+    <div class="small-container cart">
+        <h1 class="heading">Shopping <span>  Cart</span></h1>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% if cart_items %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                    <tr>
+                        <td><img src="{{ item.product.product_image.url }}" alt="product image" width="150px" height="150px"></td>
+                        <td>{{ item.product.product_name }}</td>
+                        <td><input type="number" value="{{ item.quantity }}" min="1" max="1000" class="form-control"></td>
+                        <td>{{ item.product.product_price|floatformat:2 }} $</td>
+                        <td>
+                            <form action="{% url 'remove-from-cart' item.product.id %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" class="text-right"><strong>Total:</strong></td>
+                        <td>{{ total_price|floatformat:2 }} $</td>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="total-price">
+                <table>
+                    <tr>
+                        <td>Tax</td>
+                        <td>{{tax|floatformat:2}} $</td>
+                    </tr>
+                    <tr>
+                        <td>Shipping</td>
+                        <td>{{ shipping_cost|floatformat:2 }} $</td>
+                    </tr>
+                    <tr>
+                        <td>Grand Total</td>
+                        <td>{{ grand_total|floatformat:2 }} $</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="checkout">
+                <a href="{% url 'checkout' %}" class="btn btn-primary">Checkout</a>
+            </div>
+        {% else %}
+            <h3>Your Cart Is Empty</h3>
+        {% endif %}
+    </div>
+
+{% endblock %}
+
+
+{% comment %} <div class="total-price">
+            <table>
+                <tr>
+                    <td>Subtotal</td>
+                    <td>$150.00</td>
+                </tr>
+                <tr>
+                    <td>Tax</td>
+                    <td>$25</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td>$175.00</td>
+                </tr>
+            </table>
+        </div> {% endcomment %}
+{% comment %} <table>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="cart-info">
+                            <img src="{% static '/images/orange3.webp' %}">
+                            <div>
+                                <p>Orange t-shirt</p>
+                                <small>price : <span>$50.00</span></small>
+                                <br>
+                                <a href="">remove</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td><input type="number" value="1"></td>
+                    <td>$50.00</td>
+                </tr>
+            </table> {% endcomment %}

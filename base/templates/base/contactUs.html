@@ -1,0 +1,96 @@
+{% extends 'base_template/base.html' %}
+{% load static %}
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+<div class="contact_us">
+    <h1 class="heading">Contact <span>  Us</span></h1>
+    <div class="box">
+        <!-- form box -->
+        <div class="contact form">
+
+            <form>
+                <div class="formbox">
+                    <div class="row50">
+                        <div class="inputbox">
+                            <span>First Name</span>
+                            <input type="text" placeholder="Enter your First Name.." />
+                        </div>
+                        <div class="inputbox">
+                            <span>Last Name</span>
+                            <input type="text" placeholder="Enter your First Name.." />
+                        </div>
+                    </div>
+                    <div class="row50">
+                        <div class="inputbox">
+                            <span>Email</span>
+                            <input type="email" placeholder="Enter your Email" />
+                        </div>
+                        <div class="inputbox">
+                            <span>Mobile</span>
+                            <input type="text" placeholder="+02 213 254 26" />
+                        </div>
+                    </div>
+                    <div class="row100">
+                        <div class="inputbox">
+                            <span>massage</span>
+                            <textarea placeholder="enter your massage here...."></textarea>
+                        </div>
+                    </div>
+                    <div class="row100">
+                        <div>
+                            <input type="submit" class="btn" value="send" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- info box -->
+        <div class="contact info">
+            <h3>Contact Info</h3>
+            <div class="infobox">
+                <div>
+                    <span><ion-icon name="location"></ion-icon></span>
+                    <p>Banha,Qaloupay<br />Egypt</p>
+                </div>
+                <div>
+                    <span><ion-icon name="mail"></ion-icon></span>
+                    <a href="mailto:Ahmed@gmail.com">Ahmed@gmail.com</a>
+                </div>
+                <div>
+                    <span><ion-icon name="call"></ion-icon></span>
+                    <a href="tel:+0213456015">+0213456015</a>
+                </div>
+                <!-- social media link -->
+                <ul class="sci">
+                    <li>
+                        <a href="#">
+                            <ion-icon name="logo-facebook"></ion-icon>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <ion-icon name="logo-twitter"></ion-icon>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <ion-icon name="logo-linkedin"></ion-icon>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <ion-icon name="logo-instagram"></ion-icon>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- map box -->
+        <div class="contact map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3438.6598724942214!2d31.202320484920197!3d30.474070581728032!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f7df5645a794dd%3A0xf23e10419a7decdf!2z2YPZhNmK2Kkg2KfZhNit2KfYs9io2KfYqiDZiNin2YTYsNmD2KfYoSDYp9mE2KfYtdi32YbYp9i52YogLSDYrNin2YXYudipINio2YbZh9in!5e0!3m2!1sar!2seg!4v1675176000317!5m2!1sar!2seg"
+                style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+</div>
+{% endblock %}

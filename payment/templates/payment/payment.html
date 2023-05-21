@@ -1,0 +1,120 @@
+{% extends 'base_template/base.html' %}
+{% load static %}
+{% block title %}Payment{% endblock %}
+
+{% block content %}
+<!------------- payment ---------------->
+
+<!--Messages-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            {% if messages %}
+                {% for message in messages %}
+                    <br>
+                    <br>
+                    <br>
+                    <div class="alert alert-{{message.tags}}" role="alert">
+                        {{message}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+<section class="payment">
+    <h1 class="heading"> <span> payment</span></h1>
+    <div class="p-container">
+        <form action="{% url 'billing-address-and-payment-information' %}" method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col">
+                    <h3 class="title">billing address</h3>
+                    <div class="input-box">
+                        <span>full name</span>
+                        <input type="text" placeholder="enter your name" name="full_name" required>
+                    </div>
+
+                    <div class="input-box">
+                        <span>email :</span>
+                        <input type="email" placeholder="enter your email" name="email" required>
+                    </div>
+
+                    <div class="input-box">
+                        <span>address</span>
+                        <input type="text" placeholder="room - street - locality" name="address" required>
+                    </div>
+
+                    <div class="input-box">
+                        <span>city</span>
+                        <input type="text" placeholder="enter your city" name="city" required>
+                    </div>
+                    <div class="flex">
+                        <div class="input-box">
+                            <span>state :</span>
+                            <input type="text" placeholder="enter your state" name="state" required>
+                        </div>
+
+                        <div class="input-box">
+                            <span>zip code :</span>
+                            <input type="text" placeholder="enter your code" name="zip_code" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <h3 class="title">payment</h3>
+
+
+                    <div class="input-box">
+                        <span>cards accepted :</span>
+                        <img src="{% static '/images/card_img.png' %}">
+
+                        <div class="input-box">
+                            <span>name on card :</span>
+                            <input type="text" placeholder="enter your name in card" name="payment_method" required>
+                        </div>
+                        <div class="input-box">
+                            <span>cridet card number :</span>
+                            <input type="text" placeholder="enter credit card number" name="card_number" id="card_number" maxlength="16" required>
+                        </div>
+                        <div class="input-box">
+                            <span>exp month :</span>
+                            <input type="text" placeholder="enter month" name="exp_month" required>
+                        </div>
+                        <div class="flex">
+                            <div class="input-box">
+                                <span>exp year :</span>
+                                <input type="number" placeholder="enter year" name="exp_year" required>
+                            </div>
+
+                            <div class="input-box">
+                                <span>cvv :</span>
+                                <input type="text" placeholder="123" name="cvv" id="cvv" maxlength="3" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="submit" value="checkout" class="submit-btn">
+        </form>
+
+    </div>
+</section>
+
+<script>
+    $(document).ready(function () {
+        $('#card_number').keyup(function () {
+            var card_number = $(this).val();
+            if (card_number.length == 4 || card_number.length == 9 || card_number.length == 14) {
+                $(this).val(card_number + '-');
+            }
+        });
+    });
+</script>
+{% endblock %}

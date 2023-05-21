@@ -1,0 +1,73 @@
+{% extends 'base_template/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<section class="home" id="home" style="background-image: url({% static '/images/banner.avif' %});">
+    <div class="content">
+        <h3 style="color: white">Join to <span>cloclub</span></h3>
+        <p style="color: white">As a member of the adiClub team,
+            you get rewarded for what you love to do. 
+            After you got this next option: A voucher for 20% off your next purchase
+            Get instant access to all membership benefits Limited edition products and collections Special
+            offers and offers</p>
+    </div>
+</section>
+
+
+<section class="categories">
+    <h1 class="heading">our <span>categories</span></h1>
+    <div class="box-container">
+        <div class="box">
+            <img src="{% static '/images/men.webp' %}" alt="">
+            <h3>men</h3>
+            <p>Lorem ipsum dolor sit amet consectetur<br>adipisicing elit. Tempore, numquam!</p>
+            <a href="" class="btn">shop now</a>
+        </div>
+
+        <div class="box">
+            <img src="{% static '/images/woman.webp' %}" alt="">
+            <h3>women</h3>
+            <p>Lorem ipsum dolor sit amet consectetur<br> adipisicing elit. Tempore, numquam!</p>
+            <a href="" class="btn">shop now</a>
+        </div>
+
+        <div class="box">
+            <img src="{% static '/images/boy.webp' %}" alt="">
+            <h3>children</h3>
+            <p>Lorem ipsum dolor sit amet consectetur<br> adipisicing elit. Tempore, numquam!</p>
+            <a href="" class="btn">shop now</a>
+        </div>
+    </div>
+</section>
+
+<!-- contact us -->
+<section class="conc">
+    <h2>Contact us to get good products</h2>
+    <a style="text-decoration: none;" href="{% url 'contact' %}" class="btn1">contact us</a>
+</section>
+
+
+<section class="features">
+    <h1 class="heading">our <span>features</span></h1>
+    <div class="box-container">
+        <div class="box">
+            <img src="{% static '/images/feature-img-2.png' %}" alt="">
+            <h3>free delivary</h3>
+            <p>We're excited to offer free delivery for all,<br> orders making it easier than ever to shop for your<br> favorite styles.</p>
+            <a href="{% url 'delivery' %}" class="btn">read more</a>
+        </div>
+
+        <div class="box">
+            <img src="{% static '/images/feature-img-3.png' %}" alt="">
+            <h3>easy payments</h3>
+            <p>We understand that payment options can be<br> a concern when shopping online, so we've made<br> it easy for you to pay for your order.</p>
+            <a href="{% url 'checkout' %}" class="btn">read more</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+</body>
+
+</html>

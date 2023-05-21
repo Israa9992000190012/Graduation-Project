@@ -1,0 +1,157 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>{% block pagestitle %}{% endblock %}</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <section style="background-color: #eee;">
+            <div class="container py-5">
+                <div class="row">
+                <div class="col">
+                    <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="{% url 'd-index' %}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+                    </ol>
+                    </nav>
+                </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <img src="{{user.profile.profile_pic.url}}" alt="avatar"
+                            class="rounded-circle img-fluid" style="width: 150px;">
+                            <h5 class="my-3">{{user.profile.first_name}} {{user.profile.last_name}}</h5>
+                            <p class="text-muted mb-1">{{user.profile.email}}</p>
+                            <p class="text-muted mb-4">{{user.profile.phone}}</p>
+                            <!-- Alret that the message has been sent or not -->
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                                        {{message}}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            <div class="d-flex justify-content-center mb-2">
+                                <form action="" method="POST">
+                                    {% csrf_token %}
+                                    <textarea name="message" id="message" cols="30" rows="3" class="form-control" placeholder="Write a message"></textarea>
+                                    <br>
+                                    <button type="submit" class="btn btn-primary ms-1">Message</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Full Name</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{user.profile.first_name}} {{user.profile.last_name}}</p>
+                        </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Email</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{user.profile.email}}</p>
+                        </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Phone</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{user.profile.phone}}</p>
+                        </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">City</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{user.profile.city}}</p>
+                        </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Zip Code</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{user.profile.zipcode}}</p>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row">
+                        <h3 class="mb-4 text-center"><i class="fas fa-tasks me-2"></i>Orders</h3>
+                        {% if orders %}
+                            {% for order in orders %}
+                                <div class="col-md-6">
+                                    <div class="card mb-4 mb-md-0">
+                                        <div class="card-body">
+                                            <p class="mb-4"><span class="text-primary font-italic me-1">Order #</span>{{order.order_id|truncatechars:3}}</p>
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Product Name</p>
+                                            </div>
+                                            <p class="mb-1" style="font-size: .77rem;">{{order.product.product_name}}</p>
+                                            <hr>
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Product Quantity</p>
+                                            </div>
+                                            <p class="mt-4 mb-1" style="font-size: .77rem;">{{order.quantity}}</p>
+                                            <hr>
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Payment Method</p>
+                                            </div>
+                                            <p class="mt-4 mb-1" style="font-size: .77rem;">{{order.payment.payment_method}}</p>
+                                            <hr>
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Ordered Date</p>
+                                            </div>
+                                            <p class="mt-4 mb-1" style="font-size: .77rem;">{{order.ordered_date}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            {% endfor %}
+                        {% else %}
+                            <h3 class="mb-4 text-center">No Orders</h3>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End of Profile Section -->
+
+        <script>
+            var btn_close = document.querySelector('.btn-close');
+            btn_close.addEventListener('click', function(){
+                var alert = document.querySelector('.alert');
+                alert.style.display = 'none';
+            });
+            
+        </script>
+    </body>
+</html>

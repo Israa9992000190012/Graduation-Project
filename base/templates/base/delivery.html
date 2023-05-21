@@ -1,0 +1,71 @@
+{% extends 'base_template/base.html' %}
+{% load static %}
+{% block title %}Delivery{% endblock %}
+
+{% block content %}
+<!--------------- main section  ---------------->
+<main class="main">
+    <div class="main-container">
+        <div class="main-container__left">
+            <h1>Free delivery</h1>
+            <p>Enjoy the convenience of having your products delivered straight to your door, at no extra cost.</p>
+            <p>No hidden fees or surcharges, just free delivery on every order, every time.</p>
+            <br>
+            <!-- Click here to purchase your order(s)-->
+            <a href="{% url 'index' %}">Click here to purchase your order(s)</a>
+        </div>
+        <div class="main-container__right">
+            <img src="{% static '/images/delivery.jpg' %}" alt="delivery">
+        </div>
+    </div>
+</main>
+
+
+<style>
+    .main{
+        background-color: #f5f5f5;
+        padding: 0 10%;
+    }
+    .main-container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5% 0;
+    }
+    .main-container__left{
+        width: 50%;
+    }
+    .main-container__left h1{
+        font-size: 3rem;
+        font-weight: 600;
+        margin-bottom: 2%;
+    }
+    .main-container__left p{
+        font-size: 1.2rem;
+        font-weight: 400;
+        margin-bottom: 2%;
+    }
+    .main-container__left a{
+        text-decoration: none;
+        color: #fff;
+        font-size: 1.2rem;
+        font-weight: 500;
+        background-color: #0044fe;
+        padding: 2% 5%;
+        border-radius: 15px;
+        
+    }
+    .main-container__left a:hover{
+        background-color: #000;
+    }
+    .main-container__right{
+        width: 50%;
+        margin-top: 10%;
+
+    }
+    .main-container__right img{
+        width: 100%;
+    }
+    
+</style>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base_template/base.html' %}
+{% load static %}
+{% block title %}About{% endblock %}
+
+{% block content %}
+<!-- about -->
+<section class="about">
+    <div class="heading">
+        <h1 class="heading">About <span>  Us</span></h1>
+    </div>
+
+    <div class="about-container">
+        <div class="about-img">
+            <img src="{% static '/images/abbout.webp' %}">
+        </div>
+        <div class="about-text">
+            <h1>Best Customer Experience</h1>
+            <p>Welcome to our online cloth's brand! We are a team of passionate fashion enthusiasts who are dedicated to providing you with high-quality clothing at affordable prices.
+                Our goal is to make fashion accessible to everyone, regardless of their budget or location. That's why we offer a wide range of styles and sizes to suit all tastes and body types.
+                Our clothes are made from the best materials and designed to be both stylish and comfortable, so you can look and feel your best. We believe that every person deserves to feel confident in their clothing, and that's what we aim to achieve with our brand.</p>
+            <p>We understand that shopping for clothes online can be a challenge, which is why we have a team of friendly and knowledgeable customer service representatives to help you with any questions or concerns you may have.
+                We are committed to sustainability and ethical production practices, so you can feel good about the clothes you buy from us.
+                Thank you for choosing our brand, and we look forward to helping you create your own unique style!</p>
+            <a href="#" class="btn">Learn More</a>
+        </div>
+    </div>
+
+</section>
+{% endblock %}
+<!-- end of about -->

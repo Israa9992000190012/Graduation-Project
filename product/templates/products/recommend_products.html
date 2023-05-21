@@ -1,0 +1,15 @@
+<h1 class="text-center">Recommended products</h1>
+<div class="row">
+    {% if recommended_products %}
+        {% for rrp in recommended_products %}
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{rrp}}</h5>
+                        <p class="card-text">by Eric Ries</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}    
+</div>

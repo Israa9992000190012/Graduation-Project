@@ -1,0 +1,114 @@
+{% extends 'base_template/base.html' %}
+{% load static %}
+{% block title %}Search-results{% endblock %}
+
+{% block content %}
+<style>
+    h1{
+        text-align: center;
+        font-size: 30px;
+        font-weight: 600;
+        margin-top: 50px;
+    }
+    h4{
+        font-size: 20px;
+        font-weight: 600;
+    }
+    .price{
+        font-size: 20px;
+        font-weight: 600;
+        color: #ff0000;
+    }
+    a#title{
+        font-size: 14px;
+        font-weight: 400;
+        color: #000000;
+        text-decoration: none;
+    }
+    a#title:hover{
+        color: #ff0000;
+    }
+    .center{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
+        align-items: center;
+        justify-content: center;
+        margin-top: 60px;
+
+    }
+    .material-p{
+        font-size: 14px;
+        font-weight: 600;
+        color: #000000;
+    }
+    .material{
+        font-size: 14px;
+        font-weight: 400;
+        color: #000000;
+    }
+    .dot {
+        height: 10px;
+        width: 10px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+
+</style>
+    {% if products %}
+        <br>
+        <h4 style="text-align: center">Found <span style="color: #ff0000">{{ products|length }}</span> results</h4>
+        <hr>
+        <div class="d-flex justify-content-center row">
+            <div class="col-md-10">
+                {% for result in products %}
+                    <div class="row p-2 bg-white border rounded">
+                        <div class="col-md-3 mt-1">
+                            {% if result.product_image %}
+                                <img src="{{ result.product_image.url }}" alt="" style="width: 200px; height: 200px; float: left; margin-right: 10px">
+                            {% else %}
+                                <img src="{% static 'images/no_image.png' %}" alt="" style="width: 200px; height: 200px; float: left; margin-right: 10px">
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mt-1">
+                            <a href="{% url 'product-details' result.id %}" id="title">{{ result.product_name }}</a>
+                            <p class="price">{{ result.product_price }}$</p>
+                            <p class="material-p">Materials</p>
+                            {% if result.product_material.all %}
+                                {% for material in result.product_material.all %}
+                                    <span class="dot"></span>
+                                    <span class="material">{{ material }}</span>
+                                {% endfor %}
+                            {% else %}
+                                <span class="dot"></span>
+                                <span class="material">Cotton</span>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-3 mt-1">
+                            <a href="{% url 'product-details' result.id %}" class="btn btn-primary center">View Details</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <h1>No results found for <span style="color: #ff0000">{{ query }}</span></h1>
+    {% endif %}
+{% endblock %}
+
+        {% comment %} <ul class="search-ul">
+            {% for result in products %}
+                <li>
+                    {% if result.product_image %}
+                        <img src="{{ result.product_image.url }}" alt="" style="width: 100px; height: 100px; float: left; margin-right: 10px">
+                    {% else %}
+                        <img src="{% static 'images/no_image.png' %}" alt="" style="width: 100px; height: 100px; float: left; margin-right: 10px">
+                    {% endif %}
+                    <a href="{% url 'product-details' result.id %}">{{ result.product_name }}</a>
+                    <p class="price">{{ result.product_price }}$</p>
+                </li>
+            {% endfor %}
+        </ul> {% endcomment %}
